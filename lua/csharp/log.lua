@@ -16,6 +16,7 @@ function M.log(level, message, data)
   local config = require("csharp.config").get_config()
   if config == nil then
     M.queue(level, message, data)
+    return
   end
   config = config.logging
   local logger = require("structlog").get_logger("csharp_logger")
