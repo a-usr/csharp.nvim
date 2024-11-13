@@ -13,10 +13,11 @@ end
 ---@param message string
 ---@param data table?
 function M.log(level, message, data)
-  local config = require("csharp.config").get_config().logging
+  local config = require("csharp.config").get_config()
   if config == nil then
     M.queue(level, message, data)
   end
+  config = config.logging
   local logger = require("structlog").get_logger("csharp_logger")
   if logger == nil or vim.log.levels[level] < vim.log.levels[config.level] then
     return
